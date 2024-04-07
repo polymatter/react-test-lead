@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Table from "react-bootstrap/Table";
 
-import { formatCurrency } from "../utils/formatCurrency";
+import { formatCurrency } from "../utils/FormatCurrency/formatCurrency";
 
 export default function MortgageCalculator() {
 const currency = "£"

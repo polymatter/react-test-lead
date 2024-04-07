@@ -1,4 +1,4 @@
-import { formatCurrency } from './formatCurrency';
+import { formatCurrency } from '../FormatCurrency/formatCurrency';
 
 describe('formatCurrency', () => {
   it('should format the given amount with default decimal places', () => {
