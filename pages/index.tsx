@@ -9,6 +9,8 @@ import Table from "react-bootstrap/Table";
 import { formatCurrency } from "../utils/formatCurrency";
 
 export default function MortgageCalculator() {
+const currency = "£"
+
   return (
     <Container>
       <title>Mortgage Calculator Test</title>
@@ -17,7 +19,7 @@ export default function MortgageCalculator() {
           <Form>
             <Form.Label htmlFor="price">Property Price</Form.Label>
             <InputGroup className="mb-3">
-              <InputGroup.Text>£</InputGroup.Text>
+              <InputGroup.Text>{currency}</InputGroup.Text>
               <Form.Control
                 id="price"
                 name="price"
@@ -28,7 +30,7 @@ export default function MortgageCalculator() {
             </InputGroup>
             <Form.Label htmlFor="deposit">Deposit</Form.Label>
             <InputGroup className="mb-3">
-              <InputGroup.Text>£</InputGroup.Text>
+              <InputGroup.Text>{currency}</InputGroup.Text>
               <Form.Control
                 id="deposit"
                 name="deposit"
