@@ -73,7 +73,7 @@ export default function MortgageCalculator() {
                 />
                 <InputGroup.Text>%</InputGroup.Text>
               </InputGroup>
-              <Button className="w-full text-black" variant="primary" type="submit">
+              <Button className="w-full" variant="outline-primary" type="submit">
                 Calculate
               </Button>
             </Form>
