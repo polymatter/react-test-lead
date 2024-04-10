@@ -13,6 +13,7 @@ import Navbar from "react-bootstrap/Navbar";
 
 import { formatCurrency } from "../utils/FormatCurrency/formatCurrency";
 import { calculateMonthlyPayment, MortgageDetails } from '../utils/MortgageCalculator/calculateRepayment';
+import { calculateRemainingDebt } from '../utils/MortgageCalculator/calculateRemainingDebt';
 
 export default function MortgageCalculator() {
   const currency = "£"
@@ -22,6 +23,7 @@ export default function MortgageCalculator() {
   const [capital, setCapital] = useState<number>(0);
   const [wholeTermInterest, setWholeTermInterest] = useState<number>(0);
   const [affordabilityCheck, setAffordabilityCheck] = useState<number>(0);
+  const [remainingDebt, setRemainingDebt] = useState<number[]>([]);
 
   const calculatePressed: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -70,6 +72,16 @@ export default function MortgageCalculator() {
     const affordabilityCheck = calculateMonthlyPayment(affordabilityMortgageDetails);
     setAffordabilityCheck(affordabilityCheck);
   }, [mortgageDetails]);
+
+  useEffect(() => {
+    if (mortgageDetails == undefined) return;
+    const remainingDebt = calculateRemainingDebt(mortgageDetails);
+    setRemainingDebt(remainingDebt);
+  }, [mortgageDetails])
+
+  function sequenceArray(length: number) {
+    return Array.from({length}, (_, index) => index);
+  }
 
   return (
     <>
@@ -173,10 +185,14 @@ export default function MortgageCalculator() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>{formatCurrency(10000)}</td>
-                </tr>
+                { mortgageDetails?.mortgageTermInYears != undefined && sequenceArray(mortgageDetails.mortgageTermInYears + 1).map(year => {
+                  return (
+                    <tr>
+                    <td>{year}</td>
+                    <td>{formatCurrency(remainingDebt[year], 0)}</td>
+                  </tr>
+                  )
+                }) }
               </tbody>
             </Table>
           </Col>

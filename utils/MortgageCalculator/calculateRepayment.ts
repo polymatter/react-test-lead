@@ -8,7 +8,6 @@ export interface MortgageDetails {
 /**
  * Calculates the monthly mortgage payment.
  *
- * @param propertyPrice 
  * @param mortgageDetails object containing details of mortgage required
  * @returns The monthly mortgage payment.
  */
