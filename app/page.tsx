@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { FormEventHandler, useState } from 'react';
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -12,9 +12,24 @@ import Table from "react-bootstrap/Table";
 import Navbar from "react-bootstrap/Navbar";
 
 import { formatCurrency } from "../utils/FormatCurrency/formatCurrency";
+import { calculateMonthlyPayment, MortgageDetails } from '../utils/MortgageCalculator/calculateRepayment';
 
 export default function MortgageCalculator() {
   const currency = "£"
+  const [monthlyPayment, setMonthlyPayment] = useState<number>(0)
+  
+  const calculatePressed : FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const mortgageDetails : MortgageDetails = {
+      propertyPrice: Number(formData.get("price")),
+      annualInterestRate: Number(formData.get("interest")),
+      deposit: Number(formData.get("deposit")),
+      mortgageTermInYears: Number(formData.get("term")),
+    };
+    const monthlyPayment = calculateMonthlyPayment(mortgageDetails);
+    setMonthlyPayment(monthlyPayment);
+  }
 
   return (
     <>
@@ -26,7 +41,7 @@ export default function MortgageCalculator() {
       <Container>
         <Row className="gap-x-10 pt-3">
           <Col className="border-r" md="auto">
-            <Form>
+            <Form onSubmit={calculatePressed}>
               <Form.Label htmlFor="price">Property Price</Form.Label>
               <InputGroup className="mb-3">
                 <InputGroup.Text>{currency}</InputGroup.Text>
@@ -36,6 +51,7 @@ export default function MortgageCalculator() {
                   type="number"
                   className="no-spinner"
                   step="any"
+                  defaultValue={300_000}
                 />
               </InputGroup>
               <Form.Label htmlFor="deposit">Deposit</Form.Label>
@@ -47,6 +63,7 @@ export default function MortgageCalculator() {
                   type="number"
                   className="no-spinner"
                   step="any"
+                  defaultValue={50_000}
                 />
               </InputGroup>
 
@@ -84,7 +101,7 @@ export default function MortgageCalculator() {
               <tbody>
                 <tr className="border-b border-t">
                   <td>Monthly Payment</td>
-                  <td className="text-right">{formatCurrency(763.68)}</td>
+                  <td className="text-right">{formatCurrency(monthlyPayment)}</td>
                 </tr>
                 <tr className="border-b">
                   <td>Total Repayment</td>
