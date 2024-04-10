@@ -21,11 +21,12 @@ export default function MortgageCalculator() {
   const [totalRepayment, setTotalRepayment] = useState<number>(0);
   const [capital, setCapital] = useState<number>(0);
   const [wholeTermInterest, setWholeTermInterest] = useState<number>(0);
+  const [affordabilityCheck, setAffordabilityCheck] = useState<number>(0);
 
-  const calculatePressed : FormEventHandler<HTMLFormElement> = (event) => {
+  const calculatePressed: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const mortgageDetails : MortgageDetails = {
+    const mortgageDetails: MortgageDetails = {
       propertyPrice: Number(formData.get("price")),
       annualInterestRate: Number(formData.get("interest")),
       deposit: Number(formData.get("deposit")),
@@ -58,6 +59,17 @@ export default function MortgageCalculator() {
     const wholeTermInterest = totalRepayment - capital;
     setWholeTermInterest(wholeTermInterest);
   }, [totalRepayment, capital]);
+
+  useEffect(() => {
+    if (mortgageDetails == undefined) return;
+    const affordabilityAdjustment = 3;
+    const affordabilityMortgageDetails: MortgageDetails = {
+      ...mortgageDetails,
+      annualInterestRate: mortgageDetails.annualInterestRate + affordabilityAdjustment
+    };
+    const affordabilityCheck = calculateMonthlyPayment(affordabilityMortgageDetails);
+    setAffordabilityCheck(affordabilityCheck);
+  }, [mortgageDetails]);
 
   return (
     <>
@@ -145,7 +157,7 @@ export default function MortgageCalculator() {
                 </tr>
                 <tr className="border-b">
                   <td>Affordability check</td>
-                  <td className="text-right">{formatCurrency(921.63)}</td>
+                  <td className="text-right">{formatCurrency(affordabilityCheck)}</td>
                 </tr>
               </tbody>
             </Table>
