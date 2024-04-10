@@ -9,7 +9,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import Table from "react-bootstrap/Table";
-import Navbar from "react-bootstrap/Navbar";
 
 import { formatCurrency } from "../utils/FormatCurrency/formatCurrency";
 import { calculateMonthlyPayment, MortgageDetails } from '../utils/MortgageCalculator/calculateRepayment';
@@ -80,124 +79,117 @@ export default function MortgageCalculator() {
   }, [mortgageDetails])
 
   function sequenceArray(length: number) {
-    return Array.from({length}, (_, index) => index);
+    return Array.from({ length }, (_, index) => index);
   }
 
   return (
-    <>
-      <Navbar className="bg-body-tertiary">
-        <Container>
-          <Navbar.Brand>Mortgage Calculator</Navbar.Brand>
-        </Container>
-      </Navbar>
-      <Container>
-        <Row className="gap-x-10 pt-3">
-          <Col className="border-r" md="auto">
-            <Form onSubmit={calculatePressed}>
-              <Form.Label htmlFor="price">Property Price</Form.Label>
-              <InputGroup className="mb-3">
-                <InputGroup.Text>{currency}</InputGroup.Text>
-                <Form.Control
-                  id="price"
-                  name="price"
-                  type="number"
-                  className="no-spinner"
-                  step="any"
-                  defaultValue={300_000}
-                />
-              </InputGroup>
-              <Form.Label htmlFor="deposit">Deposit</Form.Label>
-              <InputGroup className="mb-3">
-                <InputGroup.Text>{currency}</InputGroup.Text>
-                <Form.Control
-                  id="deposit"
-                  name="deposit"
-                  type="number"
-                  className="no-spinner"
-                  step="any"
-                  defaultValue={50_000}
-                />
-              </InputGroup>
+    <Container>
+      <Row className="gap-x-10 pt-3">
+        <Col className="border-r" md="auto">
+          <Form onSubmit={calculatePressed}>
+            <Form.Label htmlFor="price">Property Price</Form.Label>
+            <InputGroup className="mb-3">
+              <InputGroup.Text>{currency}</InputGroup.Text>
+              <Form.Control
+                id="price"
+                name="price"
+                type="number"
+                className="no-spinner"
+                step="any"
+                defaultValue={300_000}
+              />
+            </InputGroup>
+            <Form.Label htmlFor="deposit">Deposit</Form.Label>
+            <InputGroup className="mb-3">
+              <InputGroup.Text>{currency}</InputGroup.Text>
+              <Form.Control
+                id="deposit"
+                name="deposit"
+                type="number"
+                className="no-spinner"
+                step="any"
+                defaultValue={50_000}
+              />
+            </InputGroup>
 
-              <Form.Label htmlFor="term">Mortgage Term</Form.Label>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  id="term"
-                  name="term"
-                  type="number"
-                  step="any"
-                  defaultValue={15}
-                />
-                <InputGroup.Text>years</InputGroup.Text>
-              </InputGroup>
-              <Form.Label htmlFor="interest">Interest rate</Form.Label>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  id="interest"
-                  name="interest"
-                  type="number"
-                  step="any"
-                  className="no-spinner"
-                  defaultValue={5.25}
-                />
-                <InputGroup.Text>%</InputGroup.Text>
-              </InputGroup>
-              <Button className="w-full" variant="outline-primary" type="submit">
-                Calculate
-              </Button>
-            </Form>
-          </Col>
-          <Col md="auto">
-            <h2 className="pb-3">Results</h2>
-            <Table striped="columns">
-              <tbody>
-                <tr className="border-b border-t">
-                  <td>Monthly Payment</td>
-                  <td className="text-right">{formatCurrency(monthlyPayment)}</td>
-                </tr>
-                <tr className="border-b">
-                  <td>Total Repayment</td>
-                  <td className="text-right">{formatCurrency(totalRepayment)}</td>
-                </tr>
-                <tr className="border-b">
-                  <td>Capital</td>
-                  <td className="text-right">{formatCurrency(capital)}</td>
-                </tr>
-                <tr className="border-b">
-                  <td>Interest</td>
-                  <td className="text-right">{formatCurrency(wholeTermInterest)}</td>
-                </tr>
-                <tr className="border-b">
-                  <td>Affordability check</td>
-                  <td className="text-right">{formatCurrency(affordabilityCheck)}</td>
-                </tr>
-              </tbody>
-            </Table>
-          </Col>
+            <Form.Label htmlFor="term">Mortgage Term</Form.Label>
+            <InputGroup className="mb-3">
+              <Form.Control
+                id="term"
+                name="term"
+                type="number"
+                step="any"
+                defaultValue={15}
+              />
+              <InputGroup.Text>years</InputGroup.Text>
+            </InputGroup>
+            <Form.Label htmlFor="interest">Interest rate</Form.Label>
+            <InputGroup className="mb-3">
+              <Form.Control
+                id="interest"
+                name="interest"
+                type="number"
+                step="any"
+                className="no-spinner"
+                defaultValue={5.25}
+              />
+              <InputGroup.Text>%</InputGroup.Text>
+            </InputGroup>
+            <Button className="w-full" variant="outline-primary" type="submit">
+              Calculate
+            </Button>
+          </Form>
+        </Col>
+        <Col md="auto">
+          <h2 className="pb-3">Results</h2>
+          <Table striped="columns">
+            <tbody>
+              <tr className="border-b border-t">
+                <td>Monthly Payment</td>
+                <td className="text-right">{formatCurrency(monthlyPayment)}</td>
+              </tr>
+              <tr className="border-b">
+                <td>Total Repayment</td>
+                <td className="text-right">{formatCurrency(totalRepayment)}</td>
+              </tr>
+              <tr className="border-b">
+                <td>Capital</td>
+                <td className="text-right">{formatCurrency(capital)}</td>
+              </tr>
+              <tr className="border-b">
+                <td>Interest</td>
+                <td className="text-right">{formatCurrency(wholeTermInterest)}</td>
+              </tr>
+              <tr className="border-b">
+                <td>Affordability check</td>
+                <td className="text-right">{formatCurrency(affordabilityCheck)}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
 
-          <Col md="auto">
-            <h2 className="pb-3">Yearly Breakdown</h2>
-            <Table className="max-w-52" bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th>Year</th>
-                  <th>Remaining Debt</th>
-                </tr>
-              </thead>
-              <tbody>
-                { mortgageDetails?.mortgageTermInYears != undefined && sequenceArray(mortgageDetails.mortgageTermInYears + 1).map(year => {
-                  return (
-                    <tr>
+        <Col md="auto">
+          <h2 className="pb-3">Yearly Breakdown</h2>
+          <Table className="max-w-52" bordered hover size="sm">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Remaining Debt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mortgageDetails?.mortgageTermInYears != undefined && sequenceArray(mortgageDetails.mortgageTermInYears + 1).map(year => {
+                return (
+                  <tr key={year}>
                     <td>{year}</td>
                     <td>{formatCurrency(remainingDebt[year], 0)}</td>
                   </tr>
-                  )
-                }) }
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-      </Container>
-    </>
+                )
+              })}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </Container>
   )
 }

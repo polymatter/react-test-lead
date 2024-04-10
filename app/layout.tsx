@@ -14,6 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <nav className="bg-body-tertiary navbar navbar-expand navbar-light">
+          <div className="container">
+            <span className="navbar-brand">Mortgage Calculator</span>
+          </div>
+        </nav>
         {children}
       </body>
     </html>
