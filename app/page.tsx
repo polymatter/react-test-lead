@@ -19,6 +19,7 @@ export default function MortgageCalculator() {
   const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
   const [mortgageDetails, setMortgageDetails] = useState<MortgageDetails>();
   const [totalRepayment, setTotalRepayment] = useState<number>(0);
+  const [capital, setCapital] = useState<number>(0);
 
   const calculatePressed : FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -43,6 +44,13 @@ export default function MortgageCalculator() {
     const totalRepayment = mortgageDetails.mortgageTermInYears * 12 * monthlyPayment;
     setTotalRepayment(totalRepayment);
   }, [mortgageDetails, monthlyPayment]);
+
+  useEffect(() => {
+    if (mortgageDetails == undefined) return;
+    const { deposit, propertyPrice } = mortgageDetails;
+    const capital = propertyPrice - deposit;
+    setCapital(capital);
+  }, [mortgageDetails])
 
   return (
     <>
@@ -122,7 +130,7 @@ export default function MortgageCalculator() {
                 </tr>
                 <tr className="border-b">
                   <td>Capital</td>
-                  <td className="text-right">{formatCurrency(95000)}</td>
+                  <td className="text-right">{formatCurrency(capital)}</td>
                 </tr>
                 <tr className="border-b">
                   <td>Interest</td>
