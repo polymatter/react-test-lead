@@ -1,18 +1,23 @@
-/**
- * Calculates the monthly mortgage payment.
- *
- * @param propertyPrice - The price of the property.
- * @param deposit - The deposit amount.
- * @param annualInterestRate - The annual interest rate.
- * @param mortgageTermInYears - The mortgage term in years.
- * @returns The monthly mortgage payment.
- */
-export function calculateMonthlyPayment(
+export interface MortgageDetails {
   propertyPrice: number,
   deposit: number,
   annualInterestRate: number,
   mortgageTermInYears: number
-): number {
+}
+
+/**
+ * Calculates the monthly mortgage payment.
+ *
+ * @param propertyPrice 
+ * @param mortgageDetails object containing details of mortgage required
+ * @returns The monthly mortgage payment.
+ */
+export function calculateMonthlyPayment({
+  propertyPrice,
+  deposit,
+  annualInterestRate,
+  mortgageTermInYears
+} : MortgageDetails): number {
 
   if (propertyPrice <= 0) throw new Error("Property Price should be greater than 0");
   if (deposit < 0) throw new Error("Deposit should be 0 or higher");
