@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FormEventHandler, useState } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -16,8 +16,9 @@ import { calculateMonthlyPayment, MortgageDetails } from '../utils/MortgageCalcu
 
 export default function MortgageCalculator() {
   const currency = "£"
-  const [monthlyPayment, setMonthlyPayment] = useState<number>(0)
-  
+  const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
+  const [mortgageDetails, setMortgageDetails] = useState<MortgageDetails>();
+
   const calculatePressed : FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -27,9 +28,14 @@ export default function MortgageCalculator() {
       deposit: Number(formData.get("deposit")),
       mortgageTermInYears: Number(formData.get("term")),
     };
+    setMortgageDetails(mortgageDetails);
+  }
+
+  useEffect(() => {
+    if (mortgageDetails == undefined) return;
     const monthlyPayment = calculateMonthlyPayment(mortgageDetails);
     setMonthlyPayment(monthlyPayment);
-  }
+  }, [mortgageDetails]);
 
   return (
     <>
