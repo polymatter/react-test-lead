@@ -14,6 +14,17 @@ import { formatCurrency } from "../utils/FormatCurrency/formatCurrency";
 import { calculateMonthlyPayment, MortgageDetails } from '../utils/MortgageCalculator/calculateRepayment';
 import { calculateRemainingDebt } from '../utils/MortgageCalculator/calculateRemainingDebt';
 
+/**
+ * Main page of the Mortgage Calculator
+ * 
+ * TODO: Needs splitting into components. I prefer to split after the application after the functionality is complete as I find premature splitting can lead to a lot of indirection which can be confusing.
+ * TODO: Converted to using the App Router in order to demonstrate the newer Fetch API but haven't implemented this yet.
+ * TODO: Needs to use a validation library like Zod to allow for validation on the client and the server
+ * TODO: At the moment the server crashes the whole app with an exception when a validation error occurs. Should update UI to show a validation message instead. Left this to tie in with a validation library like Zod
+ * TODO: Wanted to create a Server Action that accepts FormData. That way the form could still work without Javascript being enabled and the server could populate the mortgage calculated values.
+ * 
+ * @returns main page
+ */
 export default function MortgageCalculator() {
   const currency = "£"
   const [monthlyPayment, setMonthlyPayment] = useState<number>(0);
