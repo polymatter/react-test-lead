@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
+import { Container, Navbar, NavbarBrand } from './reactBootstrapAdapter'
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator Test',
@@ -14,12 +15,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <nav className="bg-body-tertiary navbar navbar-expand navbar-light">
-          <div className="container">
-            <span className="navbar-brand">Mortgage Calculator</span>
-          </div>
-        </nav>
-        {children}
+        <Navbar className="bg-body-tertiary">
+          <Container>
+            <NavbarBrand>Mortgage Calculator</NavbarBrand>
+          </Container>
+        </Navbar>
+        <Container>
+          {children}
+        </Container>
       </body>
     </html>
   )

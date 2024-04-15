@@ -1,6 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Test Lead Dev
 
-## Getting Started
+## Running
 
 First, run the development server:
 
@@ -12,21 +12,22 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Considerations
 
-To run tests:
+- Updated to using App Router as it is now production-ready and gives us extra benefits. In a larger project this can be done incrementally. I consider it wise to use the "recommended path" whenever possible for maintainability. Also since this is a test it might be something you were looking for(?)
+- Added some unit tests checking for boundaries
+- Prefer destructuring an object rather than passing in multiple arguments of the same type. This way it avoids eg passing in the annual interest rate instead of the property price or something which would naturally break but possibly without a runtime error.
+- Tried to structure to work without Javascript.
+- Use of Server Actions to pass info from Client to Server
+- Server side validation so validation still works even without Javascript.
+- Use of Server Components
 
-```bash
-npm run test
-```
 
-## Learn More
+## Improvements
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- end to end tests, possibly snapshot tests
+- using a proper library for validation. I started adding in some Zod but ran out of time (we're meant to be on holiday atm)
+- I think something is up with bootstrap, ought to be fixed. Definately a few UI tweaks would go a long way eg transitions.
 
 # React Test - Mortgage Calculator App
 
