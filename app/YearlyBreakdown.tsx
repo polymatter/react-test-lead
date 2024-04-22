@@ -1,7 +1,7 @@
-import { Table } from './reactBootstrapAdapter';
+import { Table } from '@/utils/ReactBootstrapAdapter/reactBootstrapAdapter';
 import { formatCurrency } from '@/utils/FormatCurrency/formatCurrency';
 import type { MortgageDetails } from '@/utils/MortgageCalculator/calculateRepayment';
-import { calculateRemainingDebt } from '../utils/MortgageCalculator/calculateRemainingDebt';
+import { calculateRemainingDebt } from '@/utils/MortgageCalculator/calculateRemainingDebt';
 import { anyValidationErrors, getMortgageDetails, validateMortgageDetails } from './actions';
 
 function getRemainingDebt(mortgageDetails : MortgageDetails) {

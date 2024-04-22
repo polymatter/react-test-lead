@@ -1,12 +1,8 @@
-// 'use client';
-
-// import React, { FormEventHandler, useState } from 'react';
-import { Container, Row, Col } from './reactBootstrapAdapter';
+import { Container, Row, Col } from '@/utils/ReactBootstrapAdapter/reactBootstrapAdapter';
 
 import MortgageDetailForm from './MortgageDetailForm';
 import ResultsTable from './ResultsTable';
 import YearlyBreakdown from './YearlyBreakdown';
-import { getMortgageDetails, getValidationErrors } from './actions';
 import { Suspense } from 'react';
 
 /**
@@ -18,8 +14,6 @@ import { Suspense } from 'react';
  * @returns main page
  */
 export default async function MortgageCalculator() {
-  const mortgageDetails = await getMortgageDetails();
-  const errors = await getValidationErrors();
 
   return (
     <Container>

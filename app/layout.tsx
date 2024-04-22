@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '../styles/globals.css'
-import { Container, Navbar, NavbarBrand } from './reactBootstrapAdapter'
+import { Container, Navbar, NavbarBrand } from '@/utils/ReactBootstrapAdapter/reactBootstrapAdapter'
 
 export const metadata: Metadata = {
   title: 'Mortgage Calculator Test',

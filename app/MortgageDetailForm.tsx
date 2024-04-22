@@ -1,10 +1,5 @@
-import { Form, InputGroup, Button, InputGroupText, FormControl, Feedback } from './reactBootstrapAdapter';
-import { MortgageDetails } from '@/utils/MortgageCalculator/calculateRepayment';
-import { getDefaultInterestRate, getMortgageDetails, getValidationErrors, setMortgageDetails, validateMortgageDetails } from './actions';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { schema } from './mortgageDetails'
-import { preinit } from 'react-dom';
+import { Form, InputGroup, Button, InputGroupText, Feedback } from '@/utils/ReactBootstrapAdapter/reactBootstrapAdapter';
+import { getDefaultInterestRate, getMortgageDetails, setMortgageDetails, validateMortgageDetails } from './actions';
 
 export default async function MortgageDetailForm() {
   const currency = "£"

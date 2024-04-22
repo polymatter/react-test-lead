@@ -1,4 +1,4 @@
-import { Table } from './reactBootstrapAdapter'
+import { Table } from '@/utils/ReactBootstrapAdapter/reactBootstrapAdapter'
 import type { MortgageDetails } from '@/utils/MortgageCalculator/calculateRepayment'
 import { formatCurrency } from '@/utils/FormatCurrency/formatCurrency'
 import { calculateMonthlyPayment } from '@/utils/MortgageCalculator/calculateRepayment';
